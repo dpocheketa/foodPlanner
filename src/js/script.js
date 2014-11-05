@@ -1,4 +1,4 @@
 $(function(){
-	console.log(ko);
+	console.log(data);
 	
 });
