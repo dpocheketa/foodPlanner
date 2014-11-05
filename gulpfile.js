@@ -1,6 +1,5 @@
 var gulp = require("gulp");
 var concat = require('gulp-concat');
-// var watch = require('gulp-watch');
 
 gulp.task("build-scripts", function(){
 	gulp.src('./src/js/vendor/*')
@@ -18,5 +17,5 @@ gulp.task('watch', function() {
 });
 
 gulp.task("default", function(){
-	console.log("it works mf");
+	gulp.run("build-scripts");
 });
