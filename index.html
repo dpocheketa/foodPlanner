@@ -3,13 +3,93 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Food plan</title>
+	<link rel="stylesheet" href="build/css/main.css">
 </head>
 <body>
-	<h1>Welcome to the food planner!</h1>
-
-	
-
+	<h1 class="title">Welcome to the food planner!</h1>
+	<div class="container-fluid">
+		<div class="col-sm-3">
+			<h2 class="title">List of dishes: </h2>
+			<small>(Choose dishes to show details)</small>
+			<ul data-bind="foreach: data" class="list-group">
+				<li class="list-group-item" data-bind="css: {active:selected()}">
+					<label>
+						<input type="checkbox" data-bind="checked: selected">
+						<span data-bind="text: name"></span>
+					</label>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="col-sm-6">
+			<h2 class="title">List of dishes: </h2>
+		    <section data-bind="foreach: data" class="list">
+		    	<div data-bind="if: selected()">
+			        <article class="well text-center">
+				      	<h2 data-bind="text: name"></h2>
+			        	<img data-bind="attr: {src: 'build/' + img}" alt="">
+						<div class="caption container-fluid">
+							<div class="row">
+					        	<div class="col-sm-6">
+									<h4>Components:</h4>
+						        	<ul data-bind="foreach: components">
+						        		<li data-bind="text: $data" class="label label-default"></li>
+						        	</ul>
+					        	</div>
+					        	<dl class="dl-horizontal col-sm-6">
+					        		<dt>Calories: </dt>
+					        		<dd data-bind="text: calories"></dd>
+					        		<dt>Proteins:</dt>
+							        <dd data-bind="text: proteins"></dd>
+							        <dt>Fat:</dt>
+							        <dd data-bind="text: fat"></dd>
+							        <dt>Carbohydrates:</dt>
+							        <dd data-bind="text: carbohydrates"></dd>
+					        	</dl>
+							</div>
+				        	<div class="btn-group row">
+					        	<a href class="btn btn-primary" data-bind="click: $parent.addTo.bind($data, 'breakfest', $data)">Add to breakfest</a>
+					        	<a href class="btn btn-default" data-bind="click: $parent.addTo.bind($data, 'dinner', $data)">Add to dinner</a>
+					        	<a href class="btn btn-primary" data-bind="click: $parent.addTo.bind($data, 'supper', $data)">Add to supper</a>
+				        	</div>
+						</div>
+			        </articlw>
+		    	</div>
+		    </section>
+		</div>
+		<div class="col-sm-3">
+			<h3>Your ration: </h3>
+			<h4>Daily calories: <span data-bind="text: dailyCalories()"></span></h4>
+			<div data-bind="template: {name: 'eating-template', data: breakfest}"></div>
+			<div data-bind="template: {name: 'eating-template', data: dinner}"></div>
+			<div data-bind="template: {name: 'eating-template', data: supper}"></div>
+		</div>
+	</div>
 	<script src="build/js/vendor.js"></script>
 	<script src="build/js/main.js"></script>
+	<script type="text/html" id="eating-template">
+		<div class="eating-template" data-bind="if: components().length">
+
+			<div class="well">
+				<h3 class="eating-title" data-bind="text: title"></h3>
+			    <div data-bind="foreach: components">
+					<span data-bind="text: type"></span>:
+					<div data-bind="text: name"></div>
+				</div>
+				<h4>Summary:</h4>
+				<dl class="dl-horizontal">
+					<dt>Calories: </dt>
+					<dd data-bind="text: calories"></dd>
+					<dt>Proteins:</dt>
+				</dl>
+			</div>
+		</div>
+	</script>
+		        <!-- <dd data-bind="text: proteins"></dd>
+		        <dt>Fat:</dt>
+		        <dd data-bind="text: fat"></dd>
+		        <dt>Carbohydrates:</dt>
+		        <dd data-bind="text: carbohydrates"></dd> -->
+
 </body>
 </html>

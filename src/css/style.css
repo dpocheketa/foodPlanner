@@ -1,0 +1,15 @@
+.title{
+	text-align: center;
+}
+.pure-menu{
+	text-align: center;
+}
+.list-group-item input{
+	opacity: 0;
+}
+.list-group-item label{
+	display: block;
+}
+.eating-title{
+	text-transform: capitalize;
+}
